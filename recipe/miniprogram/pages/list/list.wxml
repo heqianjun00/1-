@@ -1,0 +1,35 @@
+<view>
+  <block wx:for="{{ lists }}">
+    <view class="list" bindtap="_goDetail" data-id="{{item._id}}" data-recipename="{{item.recipename}}" data-username="{{item.userInfo.nickName}}"
+                data-userimg="{{item.userInfo.avatarUrl}}">
+       <image src="{{ item.pics[0].fileID }}" class="recipe-image"></image>
+       <!-- 基本信息 -->
+       <view class="list-info">
+          <view class="list-name">{{ item.recipename }}</view>
+          <view class="list-info-userinfo">
+            <image src="{{ item.userInfo.avatarUrl }}"></image>
+            <text>{{ item.userInfo.nickName }}</text>
+          </view>
+          <view class="xing">
+            <!-- 星星 -->
+            <image wx:if="{{item.views>=0&&item.views<=10}}" src="../../static/list/xing0.png"></image>
+            <image wx:elif="{{item.views>10&&item.views<=30}}" src="../../static/list/xing1.png"></image>
+            <image wx:elif="{{item.views>30&&item.views<=50}}" src="../../static/list/xing2.png"></image>
+            <image wx:elif="{{item.views>50&&item.views<=70}}" src="../../static/list/xing3.png"></image>
+            <image wx:elif="{{item.views>70&&item.views<=100}}" src="../../static/list/xing4.png"></image>
+            <image wx:else src="../../static/list/xing5.png"></image>
+          </view>
+          <view class="number">
+            <view>  
+              <image src="../../static/list/followed.png"></image>
+              <text>{{ item.follow }}</text>
+            </view>
+            <view>
+              <image src="../../static/list/airs.png"></image>
+              <text>{{ item.views }}</text> 
+            </view>
+          </view>
+       </view>
+    </view>
+  </block>
+</view>

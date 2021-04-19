@@ -1,0 +1,43 @@
+<view>
+  <!-- 搜索栏 -->
+  <view class="search">
+    <view class="search-box">
+      <input type="text" model:value="{{typename}}" placeholder="请输入菜谱名称" placeholder-class="p-box"/>
+      <icon type="search" color="#fff" size="30"
+      bindtap="_goList" data-typename="{{typename}}" data-id="{{item._id}}" data-flag="3"
+      ></icon>
+    </view>
+  </view>
+
+  <!-- 热门搜索  -->
+  <view class="hot-search">
+    <view class="hot-search-title">
+      热门搜索
+    </view>
+    <view class="hot-search-list">
+      <view wx:for="{{hotSearch }}" bindtap="_goDetail" data-id="{{item._id}}" data-recipename="{{item.recipename}}" data-username="{{item.userInfo.nickName}}"
+                data-userimg="{{item.userInfo.avatarUrl}}">
+         {{item.recipename}}
+      </view>
+    </view>
+  </view>
+  <!-- 近期搜索  -->
+  <view class="hot-search">
+      <view class="hot-search-title">
+      近期搜索
+    </view>
+    <view wx:if="{{searchHistory.length>0}}">
+       <view class="hot-search-list" >
+          <view wx:for="{{ searchHistory}}" bindlongpress="_deletHistory" data-index="{{index}}" bindtap="_searchInp">
+            {{item}}
+          </view>
+        </view>
+          <text class="txt">注:可长按删除单条记录</text>
+          <button bindtap="_deletAll">清空搜索记录</button>
+    </view>
+    <view wx:else>
+      暂无记录
+    </view>
+
+  </view>
+</view>
